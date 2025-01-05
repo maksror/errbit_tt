@@ -9,3 +9,6 @@ default['errbit']['ruby_verion'] = '2.7.6'
 # Password chould be strong enough
 default['errbit']['admin_email'] = 'test@test.test'
 default['errbit']['password'] = 'change@me@p1ease'
+
+default['errbit']['ip'] = '0.0.0.0'
+default['errbit']['port'] = '3000'
