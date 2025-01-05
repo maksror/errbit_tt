@@ -60,7 +60,7 @@ bash 'bundle exec rake' do
     code <<-EOH
         ERRBIT_ADMIN_EMAIL=#{node['errbit']['admin_email']} \
         ERRBIT_ADMIN_PASSWORD=#{node['errbit']['password']} \
-        #{wrappers_path}/bundle exec rake errbit:bootstrap > ~/log  && touch #{flag_file}
+        #{wrappers_path}/bundle exec rake errbit:bootstrap && touch #{flag_file}
     EOH
 end
 
