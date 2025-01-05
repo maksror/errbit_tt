@@ -24,9 +24,7 @@ end
 
 # Build openssl for newer OS versions
 ruby_install_opt = ''
-platform_version = node['platform_version'].split('.').first.to_i
-
-if (node['platform'] == 'ubuntu' && platform_version > 20) || (node['platform'] == 'debian' && platform_version > 10)
+if !node['is_legasy_os']
     bash 'compile openssl for ruby' do
         usr_lib_path = "#{node['errbit']['home_dir']}/.rvm/usr"
         ruby_install_opt = "--with-openssl-dir=#{usr_lib_path}"
