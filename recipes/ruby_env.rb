@@ -65,4 +65,3 @@ bash 'setup default ruby' do
         rvm --default use ruby-#{node['errbit']['ruby_verion']}
     EOH
 end
-
