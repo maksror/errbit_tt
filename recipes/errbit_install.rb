@@ -56,8 +56,12 @@ bash 'bundle exec rake' do
     
     flag_file = 'bootstrap_done'
     not_if { ::File.exists?(flag_file) }
-    
-    code "#{wrappers_path}/bundle exec rake errbit:bootstrap && touch #{flag_file}"
+
+    code <<-EOH
+        ERRBIT_ADMIN_EMAIL=#{node['errbit']['admin_email']} \
+        ERRBIT_ADMIN_PASSWORD=#{node['errbit']['password']} \
+        #{wrappers_path}/bundle exec rake errbit:bootstrap > ~/log  && touch #{flag_file}
+    EOH
 end
 
 bash 'gem install sd_notify' do
