@@ -1,5 +1,5 @@
 control 'Errbit' do
-    title 'Verify errbit application'
+    title ''
 
     describe service('errbit') do
         it { should be_enabled }
