@@ -1,8 +1,9 @@
 remote_file '/tmp/install_rvm.sh' do
     user node['errbit']['user']
     group node['errbit']['group']
-    source 'https://get.rvm.io'
     mode 0600
+
+    source 'https://get.rvm.io'
 end
 
 rvm_bin = "#{node['errbit']['home_dir']}/.rvm/bin/rvm"
