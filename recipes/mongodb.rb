@@ -1,8 +1,3 @@
-apt_update 'update'
-
-package %w(ca-certificates gpg)
-
-
 openssl_deb_url = case node['platform']
                   when 'ubuntu'
                     'http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb'
