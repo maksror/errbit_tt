@@ -17,47 +17,47 @@ verifier:
   name: inspec
 
 platforms:
-- name: ubuntu-20.04
-  driver:
-    image: dokken/ubuntu-20.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3001:3000/tcp'
+  - name: ubuntu-20.04
+    driver:
+      image: dokken/ubuntu-20.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3001:3000/tcp'
 
-- name: ubuntu-22.04
-  driver:
-    image: dokken/ubuntu-22.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3002:3000/tcp'
+  - name: ubuntu-22.04
+    driver:
+      image: dokken/ubuntu-22.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3002:3000/tcp'
 
-- name: ubuntu-24.04
-  driver:
-    image: dokken/ubuntu-24.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3003:3000/tcp'
+  - name: ubuntu-24.04
+    driver:
+      image: dokken/ubuntu-24.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3003:3000/tcp'
 
-- name: debian-10
-  driver:
-    image: dokken/debian-10
-    pid_one_command: /bin/systemd
-    ports:
-      - '3004:3000/tcp'
+  - name: debian-10
+    driver:
+      image: dokken/debian-10
+      pid_one_command: /bin/systemd
+      ports:
+        - '3004:3000/tcp'
 
-- name: debian-11
-  driver:
-    image: dokken/debian-11
-    pid_one_command: /bin/systemd
-    ports:
-      - '3005:3000/tcp'
+  - name: debian-11
+    driver:
+      image: dokken/debian-11
+      pid_one_command: /bin/systemd
+      ports:
+        - '3005:3000/tcp'
 
-- name: debian-12
-  driver:
-    image: dokken/debian-12
-    pid_one_command: /bin/systemd
-    ports:
-      - '3006:3000/tcp'
+  - name: debian-12
+    driver:
+      image: dokken/debian-12
+      pid_one_command: /bin/systemd
+      ports:
+        - '3006:3000/tcp'
 
 suites:
   - name: default
