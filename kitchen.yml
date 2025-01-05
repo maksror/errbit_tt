@@ -5,7 +5,7 @@ driver:
   # Because of error on 'latest' version:
   # /opt/chef/embedded/bin/ruby: error while loading shared libraries:
   # libcrypt.so.2: cannot open shared object file: No such file or directory
-  chef_version: 17 # or 16 or 16.0 or 16.0.300 or current
+  chef_version: 17
 
 transport:
   name: dokken
@@ -62,8 +62,4 @@ platforms:
 suites:
   - name: default
     run_list:
-    - recipe[hello_dokken::default]
-    verifier:
-      inspec_tests:
-      - test/integration/mongodb
-      - test/integration/errbit_install
+    - recipe[errbit_tt::default]
