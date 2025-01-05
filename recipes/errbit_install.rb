@@ -93,7 +93,7 @@ systemd_unit 'errbit.service' do
             User: node['errbit']['user'],
             Group: node['errbit']['group'],
             WorkingDirectory: node['errbit']['app_dir'],
-            ExecStart: "#{wrappers_path}/puma -b 'tcp://0.0.0.0:3000'",
+            ExecStart: "#{wrappers_path}/puma -b 'tcp://#{node['errbit']['ip']}:#{node['errbit']['port']}'",
             Restart: 'always',
             KillMode: 'process',
         },
@@ -101,5 +101,5 @@ systemd_unit 'errbit.service' do
             WantedBy: 'multi-user.target',
         }
     })
-  action [:create, :enable, :start]
+  action [:create, :enable, :restart]
 end
