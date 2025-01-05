@@ -48,7 +48,7 @@ bash 'bundler install' do
     code "#{wrappers_path}/bundler install"
 end
 
-bash 'bundle exec rake' do
+bash 'run bootstrap' do
     user node['errbit']['user']
     group node['errbit']['group']
     cwd node['errbit']['app_dir']
@@ -60,7 +60,7 @@ bash 'bundle exec rake' do
     code <<-EOH
         ERRBIT_ADMIN_EMAIL=#{node['errbit']['admin_email']} \
         ERRBIT_ADMIN_PASSWORD=#{node['errbit']['password']} \
-        #{wrappers_path}/bundle exec rake errbit:bootstrap > ~/log  && touch #{flag_file}
+        #{wrappers_path}/bundle exec rake errbit:bootstrap && touch #{flag_file}
     EOH
 end
 
@@ -72,15 +72,10 @@ bash 'gem install sd_notify' do
     code "#{wrappers_path}/gem install sd_notify"
 end
 
-unit_type = 'notify'
-platform_version = node['platform_version'].split('.').first.to_i
-
 # On Ubuntu 20 and Debian 10(EOL is coming) puma doesn't want to run in 'notify' type because of an error:
 # Systemd integration failed. It looks like you're trying to use systemd notify but don't have sd_notify gem installed
-# Iven with installed sd_notify gem and libsystemd-dev package 
-if (node['platform'] == 'ubuntu' && platform_version == 20) || (node['platform'] == 'debian' && platform_version == 10)
-    unit_type = 'simple'
-end
+# Even with installed sd_notify gem and libsystemd-dev package 
+unit_type = node['is_legasy_os'] ? 'simple' : 'notify'
 
 systemd_unit 'errbit.service' do
     content({ 

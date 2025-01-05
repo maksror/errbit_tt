@@ -1,8 +1,9 @@
 remote_file '/tmp/install_rvm.sh' do
     user node['errbit']['user']
     group node['errbit']['group']
-    source 'https://get.rvm.io'
     mode 0600
+
+    source 'https://get.rvm.io'
 end
 
 rvm_bin = "#{node['errbit']['home_dir']}/.rvm/bin/rvm"
@@ -24,9 +25,7 @@ end
 
 # Build openssl for newer OS versions
 ruby_install_opt = ''
-platform_version = node['platform_version'].split('.').first.to_i
-
-if (node['platform'] == 'ubuntu' && platform_version > 20) || (node['platform'] == 'debian' && platform_version > 10)
+if !node['is_legasy_os']
     bash 'compile openssl for ruby' do
         usr_lib_path = "#{node['errbit']['home_dir']}/.rvm/usr"
         ruby_install_opt = "--with-openssl-dir=#{usr_lib_path}"
@@ -65,4 +64,3 @@ bash 'setup default ruby' do
         rvm --default use ruby-#{node['errbit']['ruby_verion']}
     EOH
 end
-

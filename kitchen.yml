@@ -5,7 +5,7 @@ driver:
   # Because of error on 'latest' version:
   # /opt/chef/embedded/bin/ruby: error while loading shared libraries:
   # libcrypt.so.2: cannot open shared object file: No such file or directory
-  chef_version: 17 # or 16 or 16.0 or 16.0.300 or current
+  chef_version: 17
 
 transport:
   name: dokken
@@ -17,53 +17,49 @@ verifier:
   name: inspec
 
 platforms:
-- name: ubuntu-20.04
-  driver:
-    image: dokken/ubuntu-20.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3001:3000/tcp'
+  - name: ubuntu-20.04
+    driver:
+      image: dokken/ubuntu-20.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3001:3000/tcp'
 
-- name: ubuntu-22.04
-  driver:
-    image: dokken/ubuntu-22.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3002:3000/tcp'
+  - name: ubuntu-22.04
+    driver:
+      image: dokken/ubuntu-22.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3002:3000/tcp'
 
-- name: ubuntu-24.04
-  driver:
-    image: dokken/ubuntu-24.04
-    pid_one_command: /bin/systemd
-    ports:
-      - '3003:3000/tcp'
+  - name: ubuntu-24.04
+    driver:
+      image: dokken/ubuntu-24.04
+      pid_one_command: /bin/systemd
+      ports:
+        - '3003:3000/tcp'
 
-- name: debian-10
-  driver:
-    image: dokken/debian-10
-    pid_one_command: /bin/systemd
-    ports:
-      - '3004:3000/tcp'
+  - name: debian-10
+    driver:
+      image: dokken/debian-10
+      pid_one_command: /bin/systemd
+      ports:
+        - '3004:3000/tcp'
 
-- name: debian-11
-  driver:
-    image: dokken/debian-11
-    pid_one_command: /bin/systemd
-    ports:
-      - '3005:3000/tcp'
+  - name: debian-11
+    driver:
+      image: dokken/debian-11
+      pid_one_command: /bin/systemd
+      ports:
+        - '3005:3000/tcp'
 
-- name: debian-12
-  driver:
-    image: dokken/debian-12
-    pid_one_command: /bin/systemd
-    ports:
-      - '3006:3000/tcp'
+  - name: debian-12
+    driver:
+      image: dokken/debian-12
+      pid_one_command: /bin/systemd
+      ports:
+        - '3006:3000/tcp'
 
 suites:
   - name: default
     run_list:
-    - recipe[hello_dokken::default]
-    verifier:
-      inspec_tests:
-      - test/integration/mongodb
-      - test/integration/errbit_install
+    - recipe[errbit_tt::default]

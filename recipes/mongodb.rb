@@ -1,20 +1,3 @@
-openssl_deb_url = case node['platform']
-                  when 'ubuntu'
-                    'http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb'
-                  when 'debian'
-                    'http://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1w-0+deb11u2_amd64.deb'
-                  end
-
-remote_file '/tmp/libssl1.1_1.1.1.deb' do
-    source openssl_deb_url
-    mode 644
-end
-
-dpkg_package 'libssl1.1_1.1.1' do
-    source '/tmp/libssl1.1_1.1.1.deb'
-    action :install
-end
-
 mongodb_version = '8.0'
 platform_version = node['platform_version'].split('.').first.to_i
 
