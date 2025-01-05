@@ -1,4 +1,4 @@
-control 'Errbit' do
+control 'errbit' do
     title ''
 
     describe service('errbit') do
