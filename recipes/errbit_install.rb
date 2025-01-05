@@ -68,6 +68,16 @@ bash 'gem install sd_notify' do
     code "#{wrappers_path}/gem install sd_notify"
 end
 
+unit_type = 'notify'
+platform_version = node['platform_version'].split('.').first.to_i
+
+# On Ubuntu 20 and Debian 10(EOL is coming) puma doesn't want to run in 'notify' type because of an error:
+# Systemd integration failed. It looks like you're trying to use systemd notify but don't have sd_notify gem installed
+# Iven with installed sd_notify gem and libsystemd-dev package 
+if (node['platform'] == 'ubuntu' && platform_version == 20) || (node['platform'] == 'debian' && platform_version == 10)
+    unit_type = 'simple'
+end
+
 systemd_unit 'errbit.service' do
     content({ 
         Unit: {
@@ -75,7 +85,7 @@ systemd_unit 'errbit.service' do
             After: 'network.target',
         },
         Service: {
-            Type: 'notify',
+            Type: unit_type,
             User: node['errbit']['user'],
             Group: node['errbit']['group'],
             WorkingDirectory: node['errbit']['app_dir'],
