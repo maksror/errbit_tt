@@ -48,7 +48,7 @@ bash 'bundler install' do
     code "#{wrappers_path}/bundler install"
 end
 
-bash 'bundle exec rake' do
+bash 'run bootstrap' do
     user node['errbit']['user']
     group node['errbit']['group']
     cwd node['errbit']['app_dir']
