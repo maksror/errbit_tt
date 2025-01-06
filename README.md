@@ -24,20 +24,16 @@ The installation includes:
 
 - Chef Infra Client 17+
 
-
 ## Attributes
-
-## Errbit.rb
 Be careful, attribute validation is entirely on you.
-#### System user and application location
 - `default['errbit']['user']` - System user under which errbit will be run
 - `default['errbit']['group']` -System user group
 - `default['errbit']['home_dir']` - User home directory
 - `default['errbit']['app_dir']` - Application directory
-#### Admin login and password
+#
 - `default['errbit']['admin_email']` - Errbit admin email
 - `default['errbit']['password']` - Errbit admin password
-#### Puma IP and host
+#
 - `default['errbit']['ip']` - From which address to accept connections, default is 0.0.0.0
 - `default['errbit']['port']` - Port the errbit listens on, default is 3000
 
